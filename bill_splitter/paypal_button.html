@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+  <style>
+  
+    #accordion h3{
+        margin-top:5px;margin-bottom:0px;
+		font-size: 20px;
+		padding: 2px 40px
+    }
+    #accordion{
+      font-family:Verdana; font-size: 16px;
+    }
+    #accordion body li{
+      margin-bottom:5px; 
+    }
+    #accordion p.warning{
+      border: 1px solid rgb(205, 10, 10);
+      padding: 6px 10px;
+      line-height: 19px;
+      margin-bottom: 10px;
+      color: #333;
+      background: #f8f8f8;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    #accordion table, #accordion td, #accordion tr, #accordion th{
+      border: 1px solid black;
+    }
+    #accordion table, input{
+      border-collapse:collapse;
+      margin-left:60px;
+    }
+    #accordion td, #accordion th{
+      padding:2px 10px;
+    }
+    #accordion th{
+      background: #134d58;
+      color: white;
+    } 
+	
+	
+  </style>
+  
+  
+  
+   <meta charset="utf-8">
+  <title>jQuery UI Accordion - Default functionality</title>
+
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>		
+ 		<link rel="stylesheet" href="/resources/demos/style.css">		
+  <script>
+  $(function() {
+   // $( "#accordion" ).accordion();
+	$("tr:even").css("background-color", "#FFFFFF");
+	$("tr:odd").css("background-color", "#E4E4E4");
+  });
+  </script>
+
+  </head>
+  <body>
+    
+	<div id="accordion">
+  
+
+  
+  
+	
+   
+  
+  <div>
+   <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<table>
+<tr><th><input type="hidden" name="on0" value="Beer size">Buy me a beer!</td></tr><tr><td><select name="os0">
+	<option value="just a taste">just a taste $1.00 USD</option>
+	<option value="chalice">chalice $3.00 USD</option>
+	<option value="pint">pint $5.00 USD</option>
+	<option value="pitch">pitch $15.00 USD</option>
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+   
+  </div>
+</div>
+	
+	
+  </body>
+</html>
