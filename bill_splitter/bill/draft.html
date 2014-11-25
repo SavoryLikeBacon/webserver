@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+  <style>
+  
+    #accordion h3{
+        margin-top:5px;margin-bottom:0px;
+		font-size: 20px;
+		padding: 2px 40px
+    }
+    #accordion{
+      font-family:Verdana; font-size: 16px;
+    }
+    #accordion body li{
+      margin-bottom:5px; 
+    }
+    #accordion p.warning{
+      border: 1px solid rgb(205, 10, 10);
+      padding: 6px 10px;
+      line-height: 19px;
+      margin-bottom: 10px;
+      color: #333;
+      background: #f8f8f8;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    #accordion table, #accordion td, #accordion tr, #accordion th{
+      border: 1px solid black;
+    }
+    #accordion table{
+      border-collapse:collapse;
+      margin-left:60px;
+    }
+    #accordion td, #accordion th{
+      padding:2px 10px;
+    }
+    #accordion th{
+      background: #134d58;
+      color: white;
+    } 
+	
+	
+  </style>
+  
+  
+  
+   <meta charset="utf-8">
+  <title>jQuery UI Accordion - Default functionality</title>
+
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>		
+ 		<link rel="stylesheet" href="/resources/demos/style.css">		
+  <script>
+  $(function() {
+    $( "#accordion" ).accordion();
+	$("tr:even").css("background-color", "#FFFFFF");
+	$("tr:odd").css("background-color", "#E4E4E4");
+  });
+  </script>
+
+  </head>
+  <body>
+    
+	<div id="accordion">
+  <h3>People</h3>
+  <div>
+    <p>
+	
+		<table id="table_list">
+			<tr>
+			<!--		<th>ID</th> -->
+				<th>Name</th>		
+				<th>Edit</th>
+			</tr>
+			<tr>
+			
+			<!--		<td>1</td> -->
+				<td>Cory</td>		
+			    <td><input type="submit" value="Edit"></td>	
+			</tr>
+			<tr>
+			<!--		<td>2</td> -->
+				<td>Jonathan</td>	
+				<td><input type="submit" value="Edit"></td>
+			
+			</tr>
+		</table>
+		<br>
+		<form >
+		Name: <input type="text" name="name" value="">
+		<input type="submit" value="Add">
+		</form>
+	
+    </p>
+  </div>
+  <h3>Line Items</h3>
+  <div>
+    <table id="table_list">
+			<tr>
+			<!--		<th>ID</th> -->
+				<th>Name</th>		
+				<th>Cost</th>
+				<th>Current split</th>
+				<th>Edit</th>
+			</tr>
+			<tr>
+			
+			<!--		<td>1</td> -->
+				<td>Friday hotel</td>		
+			    <td>79.00</td>
+				<td>0</td>
+				<td><input type="submit" value="Edit"></td>
+				
+			</tr>
+			
+			<tr>
+			
+			<!--		<td>1</td> -->
+				<td>Saturday hotel</td>		
+			    <td>109.00</td>
+				<td>0</td>
+				<td><input type="submit" value="Edit"></td>
+				
+			</tr>
+			<tr>
+			
+			<!--		<td>1</td> -->
+				<td>room service 0</td>		
+			    <td>31.79</td>
+				<td>0</td>
+				<td><input type="submit" value="Edit"></td>
+				
+			</tr>
+			
+			<tr>
+			
+			<!--		<td>1</td> -->
+				<td>Wifi</td>		
+			    <td>25.00</td>
+				<td>0</td>
+				<td><input type="submit" value="Edit"></td>
+				
+			</tr>
+			<tr>
+			
+			<!--		<td>1</td> -->
+				<td>Fridge</td>		
+			    <td>60.00</td>
+				<td>0</td>
+				<td><input type="submit" value="Edit"></td>
+				
+			</tr>
+			
+		</table>
+		
+		<br>
+		<form >
+		Item: <input type="text" name="item" value="">
+		Cost: <input type="text" name="cost" value="">
+		<input type="submit" value="Add">
+		</form>
+  </div>
+  <h3>Assignment</h3>
+  <div>
+  
+	<table id="table_list">
+			<tr>
+			<!--		<th>ID</th> -->
+				<td BGCOLOR="white" ><b>Name</b></td>		
+				<th>Cory</th>
+				<th>Jonathan</th>
+			</tr>
+			<tr>
+			<!--		<td>1</td> -->
+				<th>Friday hotel</th>		
+			    <td><input type="checkbox" name="check" ></td>
+				<td><input type="checkbox" name="check" ></td>
+			</tr>
+			<tr>
+			<!--		<td>2</td> -->
+				<th>Saturday hotel</th>	
+				<td><input type="checkbox" name="check" ></td>
+				<td><input type="checkbox" name="check" ></td>
+			
+			</tr>
+			
+			<tr>
+			<!--		<td>1</td> -->
+				<th>room service 0</th>		
+			    <td><input type="checkbox" name="check" ></td>
+				<td><input type="checkbox" name="check" ></td>
+			</tr>
+			
+			<tr>
+			<!--		<td>1</td> -->
+				<th>Wifi</th>		
+			    <td><input type="checkbox" name="check" ></td>
+				<td><input type="checkbox" name="check" ></td>
+			</tr>
+			
+			<tr>
+			<!--		<td>1</td> -->
+				<th>Fridge</th>		
+			    <td><input type="checkbox" name="check" ></td>
+				<td><input type="checkbox" name="check" ></td>
+			</tr>
+			
+			
+			
+			<tr >
+			<!--		<td>2</td> -->
+				<th BGCOLOR="yellow">Total Cost</th>	
+				<td BGCOLOR="yellow">$20.20</td>
+				
+				<td BGCOLOR="yellow">$10.52</td>
+				
+			
+			</tr>
+			
+		</table>
+	
+	
+   
+  </div>
+  <h3>Table</h3>
+  <div>
+    <p>
+    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+    et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+    faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+    mauris vel est.
+    </p>
+    <p>
+    Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+    inceptos himenaeos.
+    </p>
+  </div>
+</div>
+	
+	
+  </body>
+</html>

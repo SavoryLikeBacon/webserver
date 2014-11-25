@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      <script>
+var MyProject = {};
+$(document).ready(function(e) {
+    
+      MyProject.tableSettings = [
+        {_table: $('#peopleTable'), _fields: ["name"], _headers: ["Name"], _defaultText: "Add some people.", 
+        data: [
+        { name: 'Cory B', bill: 0, id: 1, active: true },
+        { name: 'Troy M', bill: 0, id: 2, active: true },
+        { name: 'Kushal', bill: 0, id: 3, active: true }
+        ]},
+        {_table: $('#itemsTable'), _fields: ["name", "totalCost", "currentSplit"], _headers: ["Name", "Total Cost","Current plit"], _defaultText: "Add some items.", 
+        data: [
+        { name: 'Hotel', totalCost: 100, currentSplit: 33.33, id:2},
+        { name: 'Friday Dinner', totalCost: 30, currentSplit: 10, id:2 },
+        { name: 'Saturday Breakfast', totalCost: 30, currentSplit: 10, id:3},
+        ]},
+      ];
+		MyProject._getPeopleCount = function(){
+      return  this.tableSettings.data[0].length;
+    };
+    MyProject._getItemsCount = function(){
+      return  this.tableSettings.data[1].length;
+    };
+    MyProject.config = function(){
+      $.each(this.tableSettings, function(i, t){
+      // if no headers specified, we will use the fields as headers.
+      t._headers = (t._headers == null || t._headers.length < 1) ? t.fields : t._headers; 
+      var h = MyProject._buildRowColumns(t._headers);
+      if (t._table.children('thead').length < 1) t._table.prepend('<thead></thead>');
+      t._table.children('thead').html(h);
+
+      if(t.data.length > 0){
+        if (t._table.children('tbody').length == 0) {
+          t._table.append('<tbody>' + '' + '</tbody>');
+        }
+        var rows = '';
+        $.each(t.data, function(j, item) {
+                    rows += MyProject._buildRowColumns(t._fields, item, true);
+                });
+                t._table.children('tbody').html(rows);
+        }else{
+
+        //if (t._table.length < 1) return; //not configured.
+
+        var colspan = t._headers != null && t._headers.length > 0 ? 
+        'colspan="' + (t._headers.length + 0) + '"' : '';
+        var content = '<tr class="no-items"><td ' + colspan + ' style="text-align:center">' + 
+        t._defaultText + '</td></tr>';
+        if (t._table.children('tbody').length > 0) {
+          var c = t._table.children('tbody').children('tr');
+          if (c.length == 1 && c.hasClass('no-items')) t._table.children('tbody').empty();
+          t._table.children('tbody').html(content);
+          }
+          else {
+            t._table.append('<tbody>' + content + '</tbody>');
+          }
+        }
+      });
+
+      //_setNoItemsInfo();
+    };
+    MyProject._buildRowColumns = function(names, item, isData) {
+        var row = '<tr>';
+        if (names && names.length > 0)
+        {
+            $.each(names, function(index, name) {
+                var c = item ? item[name+''] : name;
+                row += '<td>'+ c + '</td>';  
+            });
+        }
+        var deleteButton = "<button class='delete btn btn-info'>Remove</button>";
+        if(isData){
+          row += '<td class="controls">'+deleteButton+'</td></tr>';
+        }else{
+          row += '<td class="controls">&nbsp;</td></tr>';
+        }
+        //
+        
+        return row;
+    };
+    MyProject._removeData = function(index, name){
+    //alert("test");
+    console.log(name);
+    var myName = MyProject.tableSettings[index].data;
+    $.each(myName, function(i){
+      if(myName[i].name === name) {
+        MyProject.tableSettings[index].data.splice(i,1);
+        return false;
+        }
+      })
+    //return true;
+    };
+
+    $("#peopleTable").on("click", "button.delete",
+      function(){
+        console.log('clicked delete');
+        var name = $(this).closest("tr")[0].cells[0].textContent;
+        console.log(name);
+        MyProject._removeData(0,name);
+        MyProject.config();
+
+        //$(this).closest("li").remove();
+        //do stuff
+      });
+
+    $("#mainPeopleForm").on("click", "button.add",
+      function(){
+        //do stuff to add
+      });
+
+    $('#btn-load').click(function(e) {
+        dt.load(data1);
+    });
+    
+    $('#btn-update').click(function(e) {
+        dt.load(data2);
+    });
+    
+    $('#btn-append').click(function(e) {
+        dt.load(data1, true);
+    });
+    
+    $('#btn-clear').click(function(e) {
+        dt.clear();
+    });
+
+	$('#btn-add-person').click(function(e) {
+    console.log('add person clicked');
+    console.log($('#person_input').val());
+    if($('#person_input').val().length >0){
+      var d = MyProject.tableSettings[0].data;
+      var myid = d.length < 1 ? 1 : d[d.length-1].id +1; 
+		  d.push( {name: $('#person_input').val(), bill: 0, id: myid, active: true} );
+      MyProject.config();
+      $('#person_input').val('');
+      $('#person_input').focus();
+    }
+    });
+
+
+    $('#btn-add-cost').click(function(e) {
+      
+        console.log('add cost clicked');
+        console.log($('#cost_input').val());
+        console.log($('#cost_amount_input').val());
+
+        if($('#cost_input').val().length >0 && $('#cost_amount_input').val().length >0){
+          var d = MyProject.tableSettings[1].data;
+          var myid = d.length < 1 ? 1 : d[d.length-1].id +1; 
+          d.push( { name: $('#cost_input').val(), totalCost: $('#cost_amount_input').val(), currentSplit: 0, id:myid } );
+          MyProject.config();
+          $('#cost_input').val('');
+          $('#cost_amount_input').val('');
+          $('#cost_input').focus();
+        }
+		  
+      //MyProject.people_tbl.load(MyProject.people);
+		  //
+      //return false;
+    });
+    
+
+	//load people at startup
+    $(function(e) {
+		MyProject.config();
+	});
+});
+
+
+  </script>
+	<style>
+	table{
+	font-size: medium;
+	}
+	</style>
+  </head>
+  <body >
+  
+    <h1>Using Javascript</h1>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+	
+<!--
+<div style="width: 800px">
+	<table class="table table-striped" id="data-table"></table>
+</div>
+<br />
+<button id="btn-load">Load List 1</button>&nbsp;
+<button id="btn-update">Load List 2</button>&nbsp;
+<button id="btn-append">Append List 1</button>&nbsp;
+<button id="btn-clear">Clear List</button>&nbsp;
+
+-->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a style="font-size: medium" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          People
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+	  
+<div style="width: 800px; margin-left: auto; margin-right: auto;">
+	<table class="table table-striped" id="peopleTable"></table>
+</div>
+
+<div class="input-group input-group-lg">
+  <span class="input-group-addon">Add Person</span>
+  <input id="person_input" type="text" class="form-control" placeholder="Name">
+  <span class="input-group-btn">
+        <button id="btn-add-person" class="btn btn-default" type="button">Add</button>
+      </span>
+</div>
+		
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a style="font-size: medium" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Items
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+
+
+<div style="width: 800px; margin-left: auto; margin-right: auto;">
+  <table class="table table-striped" id="itemsTable"></table>
+</div>
+
+<div class="input-group input-group-lg">
+  <span class="input-group-addon" style="width=92px">Cost Name</span>
+
+  <input id="cost_input" type="text" class="form-control" placeholder="Name">
+</div>
+
+<div class="input-group input-group-lg">
+  <span class="input-group-addon" style="width: 124px;">$</span>
+
+  <input id="cost_amount_input" type="text" class="form-control" placeholder="10.00">
+  <span class="input-group-btn">
+        <button id="btn-add-cost" class="btn btn-default" type="button">Add</button>
+      </span>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Split Costs
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+       
+<div style="width: 800px; margin-left: auto; margin-right: auto;">
+  <table class="table table-striped" id="splitTable"></table>
+</div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>
+
+
+	
+
+
